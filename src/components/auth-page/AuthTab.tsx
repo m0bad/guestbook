@@ -1,5 +1,4 @@
 import React from 'react';
-import './auth.css';
 
 type AuthTabProp = {
     name: string,
