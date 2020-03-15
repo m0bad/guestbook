@@ -41,3 +41,6 @@ export const loginService = async (data: LoginDataType) => {
     }
 
 };
+
+export const getCurrentUser = (): any => localStorage.getItem('user');
+
