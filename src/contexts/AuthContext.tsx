@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
-import {registerService}  from "../services/authService";
+import {loginService, registerService} from "../services/authService";
 // eslint-disable-next-line no-unused-vars
-import {UserDataType} from "../types/UserTypes";
+import {LoginDataType, UserDataType} from "../types/UserTypes";
 
 // @ts-ignore
 export const AuthContext = createContext();
@@ -22,8 +22,13 @@ const AuthContextProvider = (props: any) => {
         setAuthState({...authState, user: registerUser});
     };
 
+    const login = async (data: LoginDataType) => {
+        const loggedInUser = await loginService(data);
+        setAuthState({...authState, user: loggedInUser});
+    };
+
     return (
-        <AuthContext.Provider value={{authState, register}}>
+        <AuthContext.Provider value={{authState, register, login}}>
             {props.children}
         </AuthContext.Provider>
     )
