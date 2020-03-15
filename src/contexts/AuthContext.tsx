@@ -1,15 +1,14 @@
-import React, {createContext, useState} from 'react';
-import {getCurrentUser, loginService, registerService} from "../services/authService";
+import React, { createContext, useRef } from 'react';
+import { getCurrentUser, loginService, registerService } from "../services/authService";
 // eslint-disable-next-line no-unused-vars
-import {LoginDataType, UserDataType} from "../types/UserTypes";
+import { LoginDataType, UserDataType } from "../types/UserTypes";
 
 // @ts-ignore
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props: any) => {
-    // @ts-ignore
-    const loggedInUser: boolean = (getCurrentUser !== '');
-    let [authState, setAuthState] = useState({
+    const loggedInUser: boolean = !!getCurrentUser();
+    const authStateRef = useRef({
         isLoggedIn: loggedInUser,
         user: {
             email: '',
@@ -19,37 +18,26 @@ const AuthContextProvider = (props: any) => {
         error: '',
     });
 
-
     const register = async (data: UserDataType) => {
-        const registerUser = await registerService(data);
-        const {email, _id, token} = registerUser;
-        setAuthState({...authState, user: {email, _id, token}});
-        authenticateUser();
+        authStateRef.current.user = await registerService(data);
+        authenticateUser(authStateRef.current.user);
     };
 
     const login = async (data: LoginDataType) => {
-        const loggedInUser = await loginService(data);
-        const {email, _id, token} = loggedInUser;
-        setAuthState({...authState, user: {email, _id, token}});
-        authenticateUser();
+        authStateRef.current.user = await loginService(data);
+        authenticateUser(authStateRef.current.user);
     };
 
-    const authenticateUser = () => {
-        const user = {
-            email: authState.user.email,
-            _id: authState.user._id,
-            token: authState.user.token,
-        };
-        localStorage.setItem('user', JSON.stringify(user));
-        setAuthState({...authState, isLoggedIn: true});
+    const authenticateUser = (value: { _id: string; email: string; token: string }) => {
+        authStateRef.current.isLoggedIn = true;
+        localStorage.setItem('user', JSON.stringify(value));
     };
 
     return (
-        <AuthContext.Provider value={{authState, register, login}}>
+        <AuthContext.Provider value={{ authState: authStateRef.current, register, login }}>
             {props.children}
         </AuthContext.Provider>
     )
-
 };
 
 export default AuthContextProvider;
