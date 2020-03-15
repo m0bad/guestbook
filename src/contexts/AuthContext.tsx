@@ -19,19 +19,30 @@ const AuthContextProvider = (props: any) => {
     });
 
     const register = async (data: UserDataType) => {
-        authStateRef.current.user = await registerService(data);
-        authenticateUser(authStateRef.current.user);
+        try {
+            authStateRef.current.user = await registerService(data);
+            authenticateUser(authStateRef.current.user);
+        } catch (e) {
+            authStateRef.current.error = e.message;
+        }
     };
 
     const login = async (data: LoginDataType) => {
-        authStateRef.current.user = await loginService(data);
-        authenticateUser(authStateRef.current.user);
+        try {
+            authStateRef.current.user = await loginService(data);
+            authenticateUser(authStateRef.current.user);
+        } catch (error) {
+            authStateRef.current.error = error;
+        }
     };
 
     const authenticateUser = (value: { _id: string; email: string; token: string }) => {
-        authStateRef.current.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(value));
+        authStateRef.current.isLoggedIn = true;
+        authStateRef.current.error = '';
     };
+
+
 
     return (
         <AuthContext.Provider value={{ authState: authStateRef.current, register, login }}>
