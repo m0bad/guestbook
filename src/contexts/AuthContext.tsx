@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {registerService}  from "../services/authService";
 // eslint-disable-next-line no-unused-vars
-import {UserDataType} from "../types/UserDataType";
+import {UserDataType} from "../types/UserTypes";
 
 // @ts-ignore
 export const AuthContext = createContext();

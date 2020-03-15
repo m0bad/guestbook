@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {UserDataType} from "../types/UserDataType";
+import {UserDataType} from "../types/UserTypes";
 
 export const registerService = async (data: UserDataType) => {
     const {email, password, rePassword} = data;
