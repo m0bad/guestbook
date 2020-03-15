@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import './landing-page.css';
 
 export const LandingPage = () => {
@@ -13,7 +14,7 @@ export const LandingPage = () => {
                     <span className="landing-page-heading-primary-main">Welcome to Guestbook</span>
                     <span className="landing-page-heading-primary-sub">What do you think about us?</span>
                 </h1>
-                <a href="#" className="landing-page-btn landing-page-btn-white">Login</a>
+                <Link to="/auth" className="landing-page-btn landing-page-btn-white">Login</Link>
             </div>
         </header>
     );
