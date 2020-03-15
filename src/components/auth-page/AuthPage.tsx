@@ -10,19 +10,25 @@ import useInputState from "../../hooks/useInputState";
 
 //TODO: how to do this with type script
 const AuthPage = (props: any) => {
-    const {register} = useContext(AuthContext);
+
+    const {register, login} = useContext(AuthContext);
     const [currentForm, setCurrentForm] = useState('signin');
-    const [value, handleChange, reset] = useInputState({
+    const [registerData, handleRegisterChange, resetRegister] = useInputState({
         email: '',
         password: '',
         rePassword: ''
     });
+    const [loginData, handleLoginChange, resetLogin] = useInputState({
+        email: '',
+        password: ''
+    });
+
     const getCurrentForm = () => {
         switch (currentForm) {
             case 'signin':
-                return <Signin />;
+                return <Signin handleChange={handleLoginChange} value={loginData}/>;
             case 'signup':
-                return <Signup handleChange={handleChange} value={value}/>;
+                return <Signup handleChange={handleRegisterChange} value={registerData}/>;
             default:
                 return <ResetPassword/>;
         }
@@ -31,7 +37,7 @@ const AuthPage = (props: any) => {
     const getCurrentButton = () => {
         switch (currentForm) {
             case 'signin':
-                return <button type='submit'>Sign in</button>;
+                return <button type='submit' onClick={handleButtonSubmit}>Sign in</button>;
             case 'signup':
                 return <button onClick={handleButtonSubmit} type='submit'>Sign up</button>;
             default:
@@ -41,8 +47,19 @@ const AuthPage = (props: any) => {
 
     const handleButtonSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        register(value);
-        reset();
+        // TODO: refactor all those ugly switch cases later
+        switch (currentForm) {
+            case 'signin':
+                login(loginData);
+                resetLogin();
+                break;
+            case 'signup':
+                register(registerData);
+                resetRegister();
+                break;
+            default:
+                break;
+        }
     };
     return (
         <div>
