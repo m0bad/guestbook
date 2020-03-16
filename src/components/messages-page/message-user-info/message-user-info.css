@@ -1,0 +1,13 @@
+.message-user-info-photo{
+    padding-top: 0.625rem;
+    display: table-cell;
+    width: 3.5rem;
+}
+
+.message-user-info-photo .message-user-info-avatar{
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 50%;
+    background-size: contain;
+    background-image: url("https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg");
+}
