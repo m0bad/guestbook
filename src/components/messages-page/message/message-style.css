@@ -1,27 +1,6 @@
-/*.message-wrap{*/
-/*    margin-bottom: 1.25rem;*/
-/*    display: table;*/
-/*    width: 100%;*/
-/*    min-height: 5.3125rem;*/
-/*}*/
-
-
-.comment-wrap {
+.message-wrap{
     margin-bottom: 1.25rem;
     display: table;
     width: 100%;
     min-height: 5.3125rem;
-}
-
-.photo {
-    padding-top: 0.625rem;
-    display: table-cell;
-    width: 3.5rem;
-}
-.photo .avatar {
-    height: 2.25rem;
-    width: 2.25rem;
-    border-radius: 50%;
-    background-size: contain;
-    background-image: url("https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg");
 }
