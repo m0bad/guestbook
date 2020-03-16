@@ -4,12 +4,13 @@ import AuthTab from "./AuthTab";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import ResetPassword from "./ResetPassword";
-import {withRouter} from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
+import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {AuthContext} from "../../contexts/AuthContext";
 import useInputState from "../../hooks/useInputState";
 
-//TODO: how to do this with type script
-const AuthPage = (props: any) => {
+interface AuthPageProps extends RouteComponentProps<any> {}
+const AuthPage: React.FC<AuthPageProps> = ({history}: AuthPageProps) => {
 
     const {register, login} = useContext(AuthContext);
     const [currentForm, setCurrentForm] = useState('signin');
@@ -74,7 +75,7 @@ const AuthPage = (props: any) => {
                 {getCurrentButton()}
             </form>
 
-            <div id='hint' onClick={() => props.history.goBack()}>Go To Home Page</div>
+            <div id='hint' onClick={() => history.push('/')}>Go To Home Page</div>
         </div>
     );
 };
