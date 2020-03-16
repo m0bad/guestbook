@@ -1,0 +1,29 @@
+.bottom-message{
+    color: #acb4c2;
+    font-size: 0.875rem;
+}
+
+.bottom-message-date{
+    float: left;
+}
+
+.bottom-message-actions{
+    float: right;
+}
+
+.bottom-message-actions li {
+    display: inline;
+    margin: -2px;
+    cursor: pointer;
+}
+.bottom-message-actions li.bottom-message-n0-replies {
+    padding-right: 0.75rem;
+    border-right: 1px solid #e1e5eb;
+}
+.bottom-message-actions li.bottom-message-reply {
+    padding-left: 0.75rem;
+    padding-right: 0.125rem;
+}
+.bottom-message-actions li:hover {
+    color: #0095ff;
+}
