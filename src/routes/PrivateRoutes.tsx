@@ -5,11 +5,12 @@ import {Route} from "react-router-dom";
 
 type PrivateRouteProps = {
     component: React.FC;
-    options: any
+    [options: string]: any
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({component, ...options}: PrivateRouteProps) => {
-    const {isLoggedIn} = useContext(AuthContext);
+    const {authState} = useContext(AuthContext);
+    const {isLoggedIn} = authState;
     const finalComponent = isLoggedIn ? component : AuthPage;
 
     return <Route {...options} component={finalComponent}/>
