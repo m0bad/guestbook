@@ -1,0 +1,12 @@
+.message-content-block{
+   padding: 1rem;
+    background-color: #fff;
+    display: table-cell;
+    vertical-align: top;
+    border-radius: 0.1875rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.message-content-text{
+    margin-bottom: 1.25rem;
+}
