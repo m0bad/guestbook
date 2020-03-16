@@ -1,0 +1,18 @@
+html, body {
+    background-color: #f0f2fa;
+    font-family: "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+    color: #555f77;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.message-list-container {
+    margin: 2.5rem auto 0;
+    max-width: 60.75rem;
+    padding: 0 1.25rem;
+
+}
+
+p {
+    line-height: 1.3125rem;
+}
