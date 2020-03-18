@@ -1,16 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import {LoginDataType, UserDataType} from "../types/UserTypes";
+import {apiHelper} from "./api";
 
-const apiHelper = async (reqType: string, url: string, body: any): Promise<any> => {
-    return fetch(url, {
-        method: reqType,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    });
-};
+
 
 export const registerService = async (data: UserDataType) => {
     const {email, password, rePassword} = data;
