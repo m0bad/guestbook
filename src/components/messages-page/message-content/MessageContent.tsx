@@ -2,18 +2,21 @@ import React from 'react';
 import './message-content.css';
 import {BottomMessage} from "../bottom-message/BottomMessage";
 
-type Props = {
-
+type MessageContentProps = {
+    text: string,
+    numOfReplies: number,
+    createdAt: Date
 };
-export const MessageContent = (props: Props) => {
-    console.log(props);
+export const MessageContent: React.FC<MessageContentProps> = (props: MessageContentProps) => {
+    const {text, numOfReplies, createdAt} = props;
     return (
         <div className="message-content-block">
-            <p className="message-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus
-                iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto
-                tempore, quaerat explicabo veniam fuga corporis totam.</p>
+            <p className="message-content-text">{text}</p>
 
-            <BottomMessage />
+            <BottomMessage
+                numOfReplies={numOfReplies}
+                createdAt={createdAt}
+            />
         </div>
 
     );
