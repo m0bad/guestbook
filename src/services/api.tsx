@@ -1,4 +1,4 @@
-export const apiHelper = async (reqType: string, url: string, body: any): Promise<any> => {
+export const apiHelper = async (reqType: string, url: string, body: any = {}): Promise<any> => {
     return fetch(url, {
         method: reqType,
         headers: {
