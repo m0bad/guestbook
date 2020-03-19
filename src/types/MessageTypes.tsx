@@ -1,9 +1,10 @@
 import {UserDataType} from "./UserTypes";
 
 export type MessageDataType = {
+    _id: string;
     text: string;
     author: UserDataType;
-    replies?: Reply[];
+    replies: Reply[];
     createdAt: Date;
     updatedAT: Date;
 }
@@ -16,8 +17,8 @@ export type Reply = {
     updatedAt: Date;
 }
 
-export type MessageStateRef = {
-    current: {
-        messages: MessageDataType[]
-    }
+export type MessageContextType = {
+    messages: MessageDataType[],
+    getMessages(): Promise<void>;
+    addMessage(data: MessageDataType): Promise<void>;
 }
