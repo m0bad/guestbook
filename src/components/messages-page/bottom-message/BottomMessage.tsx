@@ -1,15 +1,17 @@
 import React from 'react';
 import './bottom-message.css';
-type Props = {
 
+type BottomMessageProps = {
+    createdAt: Date,
+    numOfReplies: number
 };
-export const BottomMessage = (props: Props) => {
-    console.log(props);
+export const BottomMessage: React.FC<BottomMessageProps> = (props: BottomMessageProps) => {
+    const {createdAt, numOfReplies} = props;
     return (
         <div className="bottom-message">
-            <div className="bottom-message-date">Aug 23, 2014 @ 10:32 AM</div>
+            <div className="bottom-message-date">{createdAt}</div>
             <ul className="bottom-message-actions">
-                <i className="bottom-message-n0-replies">100 reply</i>
+                <i className="bottom-message-n0-replies">{numOfReplies} reply</i>
                 <li className="bottom-message-reply">Reply</li>
             </ul>
         </div>
