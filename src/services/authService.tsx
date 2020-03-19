@@ -34,5 +34,5 @@ export const loginService = async (data: LoginDataType) => {
 
 };
 
-export const getCurrentUser = (): any => localStorage.getItem('user');
+export const getCurrentUser = (): any => JSON.parse(localStorage.getItem('user') as string);
 
