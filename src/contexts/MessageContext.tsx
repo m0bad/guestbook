@@ -1,20 +1,27 @@
-import React, {createContext, useRef} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import {addMessageService, getAllMessagesService} from "../services/messagesService";
 // eslint-disable-next-line no-unused-vars
-import {MessageDataType, MessageStateRef} from "../types/MessageTypes";
+import {MessageContextType, MessageDataType} from "../types/MessageTypes";
 
 
-// @ts-ignore
-export const MessageContext = createContext();
+export const MessageContext = createContext<Partial<MessageContextType>>({});
 
 const MessageContextProvider = (props: any) => {
-    const messageStateRef: MessageStateRef = useRef({
-        messages: []
-    });
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            await getMessages();
+        };
+        fetchMessages();
+    }, []);
 
     const getMessages = async (): Promise<void> => {
         try {
-            messageStateRef.current.messages = await getAllMessagesService();
+            const allMessages = await getAllMessagesService();
+            // TODO: why we need ts-ignore here ????
+            // @ts-ignore
+            setMessages(allMessages);
         } catch (err) {
             //TODO:  handle error here
         }
@@ -22,16 +29,16 @@ const MessageContextProvider = (props: any) => {
 
     const addMessage = async (data: MessageDataType): Promise<void> => {
         try {
-            const currentMessages = messageStateRef.current.messages;
             const newMessage: MessageDataType = await addMessageService(data);
-            messageStateRef.current.messages = [...currentMessages, newMessage];
+            // @ts-ignore
+            setMessages([...messages, newMessage]);
         } catch (err) {
             //TODO:  handle error here
         }
     };
 
     return (
-        <MessageContext.Provider value={{messages: messageStateRef.current, getMessages, addMessage}}>
+        <MessageContext.Provider value={{messages, getMessages, addMessage}}>
             {props.children}
         </MessageContext.Provider>
     )
