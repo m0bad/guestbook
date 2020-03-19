@@ -1,7 +1,7 @@
-import React, { createContext, useRef } from 'react';
-import { getCurrentUser, loginService, registerService } from "../services/authService";
+import React, {createContext, useEffect, useRef} from 'react';
+import {getCurrentUser, loginService, registerService} from "../services/authService";
 // eslint-disable-next-line no-unused-vars
-import { LoginDataType, UserDataType } from "../types/UserTypes";
+import {LoginDataType, UserDataType} from "../types/UserTypes";
 
 // @ts-ignore
 export const AuthContext = createContext();
@@ -17,6 +17,10 @@ const AuthContextProvider = (props: any) => {
         },
         error: '',
     });
+
+    useEffect(() => {
+        authStateRef.current.user = getCurrentUser();
+    }, []);
 
     const register = async (data: UserDataType) => {
         try {
@@ -43,9 +47,8 @@ const AuthContextProvider = (props: any) => {
     };
 
 
-
     return (
-        <AuthContext.Provider value={{ authState: authStateRef.current, register, login }}>
+        <AuthContext.Provider value={{authState: authStateRef.current, register, login}}>
             {props.children}
         </AuthContext.Provider>
     )
