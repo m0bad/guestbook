@@ -9,6 +9,11 @@ export type MessageDataType = {
     updatedAT: Date;
 }
 
+export type NewMessageData = {
+    text: string;
+    author: string;
+}
+
 export type Reply = {
     text: string;
     author: UserDataType;

@@ -1,14 +1,13 @@
 import React, {createContext, useEffect, useState} from "react";
 import {addMessageService, getAllMessagesService} from "../services/messagesService";
 // eslint-disable-next-line no-unused-vars
-import {MessageContextType, MessageDataType} from "../types/MessageTypes";
+import {MessageContextType, MessageDataType, NewMessageData} from "../types/MessageTypes";
 
 
 export const MessageContext = createContext<Partial<MessageContextType>>({});
 
 const MessageContextProvider = (props: any) => {
     const [messages, setMessages] = useState([]);
-
     useEffect(() => {
         const fetchMessages = async () => {
             await getMessages();
@@ -27,7 +26,7 @@ const MessageContextProvider = (props: any) => {
         }
     };
 
-    const addMessage = async (data: MessageDataType): Promise<void> => {
+    const addMessage = async (data: NewMessageData): Promise<void> => {
         try {
             const newMessage: MessageDataType = await addMessageService(data);
             // @ts-ignore
@@ -38,6 +37,7 @@ const MessageContextProvider = (props: any) => {
     };
 
     return (
+        // @ts-ignore
         <MessageContext.Provider value={{messages, getMessages, addMessage}}>
             {props.children}
         </MessageContext.Provider>

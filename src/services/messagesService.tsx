@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import {MessageDataType} from "../types/MessageTypes";
+import {MessageDataType, NewMessageData} from "../types/MessageTypes";
 import {apiHelper} from "./api";
 
 export const getAllMessagesService = async (): Promise<MessageDataType[]> => {
@@ -11,7 +11,7 @@ export const getAllMessagesService = async (): Promise<MessageDataType[]> => {
     }
 };
 
-export const addMessageService = async (data: MessageDataType): Promise<MessageDataType> => {
+export const addMessageService = async (data: NewMessageData): Promise<MessageDataType> => {
     const result = await apiHelper('POST', '/api/messages/add', data);
     if (result.status === 200) {
         return result.json();
