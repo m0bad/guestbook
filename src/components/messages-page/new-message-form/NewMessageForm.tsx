@@ -4,7 +4,6 @@ import {MessageUserInfo} from "../message-user-info/MessageUserInfo";
 
 type Props = {};
 export const NewMessageForm = (props: Props) => {
-    console.log(props);
     return (
         <div className="new-message-container">
             <MessageUserInfo/>
