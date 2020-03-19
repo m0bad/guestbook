@@ -15,3 +15,9 @@ export type Reply = {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export type MessageStateRef = {
+    current: {
+        messages: MessageDataType[]
+    }
+}
