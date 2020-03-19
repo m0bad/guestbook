@@ -5,6 +5,7 @@ import AuthPage from "./components/auth-page/AuthPage";
 import MessagesList from "./components/messages-page/messages-list/MessagesList";
 import AuthContextProvider from "./contexts/AuthContext";
 import PrivateRoute from "./routes/PrivateRoutes";
+import MessageContextProvider from "./contexts/MessageContext";
 
 function App() {
     return (
@@ -13,7 +14,9 @@ function App() {
                 <Switch>
                     <Route exact path='/' component={LandingPage}/>
                     <Route exact path='/auth' component={AuthPage}/>
-                    <PrivateRoute exact path='/messages' component={MessagesList}/>
+                    <MessageContextProvider>
+                        <PrivateRoute exact path='/messages' component={MessagesList}/>
+                    </MessageContextProvider>
                 </Switch>
             </AuthContextProvider>
         </div>
